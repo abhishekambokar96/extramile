@@ -14,10 +14,11 @@ class Change_password extends CI_Controller
     }
 
     public function index()
-    {
-        $data['title']  = $this->header_data['title'] . 'Dashboard';
-        $data['header_title']  = 'User Dashboard';
-        $data['active_vision'] = TRUE;
+    { 
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect(base_url('login/login_page'), 'refresh');
+        }
+       
         $this->load->view('change_password', $data);
     }
 

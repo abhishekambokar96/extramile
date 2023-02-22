@@ -13,9 +13,9 @@ class Assign_employee extends CI_Controller
 
     public function index()
     {
-        // if ($this->session->userdata('is_logged_in')) {
-        //  redirect(base_url(''), 'refresh');
-        // }
+        if ($this->session->userdata('is_logged_in')) {
+         redirect(base_url(), 'refresh');
+        }
         $employee = $this->Assign_employee_model->fetch_employee();
         $data = array();
         $data['employee'] = $employee;

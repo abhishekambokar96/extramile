@@ -6,16 +6,17 @@ class User_form extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        
         $this->load->library('form_validation');
         $this->load->model('User_form_model');
     }
 
     public function index()
     {
-        // if ($this->session->userdata('is_logged_in')) {
-        //  redirect(base_url(''), 'refresh');
-        // }
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect(base_url('login/login_page'), 'refresh');
+        }
+       
         $state = $this->User_form_model->fetch_state();
         $data = array();
         $data['state'] = $state;

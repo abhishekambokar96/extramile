@@ -13,6 +13,10 @@ class Employee_performance extends CI_Controller
 
     public function index()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect(base_url('login/login_page'), 'refresh');
+        }
+       
         $this->load->view('employee_performance', $data);
     }
 
