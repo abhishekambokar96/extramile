@@ -9,7 +9,6 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model(['login_model', 'Change_password_model']);
-        $this->load->library('email');
     }
 
     public function index()
@@ -73,10 +72,6 @@ class Login extends CI_Controller
     }
     public function login_page()
     {
-        $data['title']             = 'Dashboard';
-        $data['header_title']     = 'Dashboard';
-        $data['dashboard']      = TRUE;
-
         $this->load->view('login', $data);
     }
 

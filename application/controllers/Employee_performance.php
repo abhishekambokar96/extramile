@@ -13,66 +13,7 @@ class Employee_performance extends CI_Controller
 
     public function index()
     {
-        // if ($this->session->userdata('is_logged_in')) {
-        //  redirect(base_url('student/student_dashboard'), 'refresh');
-        // }
-        // $state = $this->Employee_performance_model->fetch_state();
-        // $data = array();
-        // $data['state'] = $state;
         $this->load->view('employee_performance', $data);
-    }
-
-    public function save()
-    {
-
-        $name = $this->input->post('name');
-        $email = $this->input->post('email');
-        $mobile = $this->input->post('mobile');
-        $gender = $this->input->post('gender');
-        $state = $this->input->post('state');
-
-        $this->form_validation->set_rules('name', 'Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('mobile', 'Mobile No ', 'required|regex_match[/^[0-9]{10}$/]');
-        $this->form_validation->set_rules('gender', ' Gender', 'required');
-        $this->form_validation->set_rules('state', ' State', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $response['res_code'] = 1;
-            $response['message'] = validation_errors();
-            $response['method'] = "RegErrMsgNoReload";
-            print_r(json_encode($response));
-            exit;
-        }
-        $password = password_hash("India@123", PASSWORD_DEFAULT);
-        $data = array();
-        $data_user = array();
-        $data['name']         = $name;
-        $data['email']        = $email;
-        $data['mobile']       = $mobile;
-        $data['gender']       = $gender;
-        $data['state']        = $state;
-        $data['username']     = $email;
-        $data['password']     = $password;
-        $data['role_id']      = 2;
-        $data['created_by']   = 3;
-        $data['created_time'] = date("Y-m-d H:i:s");
-        $data = $this->security->xss_clean($data);
-        $res = $this->User_form_model->save_details($data);
-
-        if (empty($res)) {
-            $response['res_code'] = 1;
-            $response['message'] = "Something Went Wrong ! Data not inserted";
-            $response['method'] = "RegErrMsgNoReload";
-            print_r(json_encode($response));
-            exit;
-        } else {
-            $response['res_code'] = 1;
-            $response['message'] = "Details Added Successfully";
-            $response['method'] = "RegSuccMsg";
-            print_r(json_encode($response));
-            exit;
-        }
     }
 
     public function fetch_details()
@@ -90,7 +31,7 @@ class Employee_performance extends CI_Controller
             $row[] = $stud->employee_ref;
             if ($stud->feedback_status == 1) {
                 $row[] = '<a type="button" data-id="' . $stud->id . '" class="btn btn-success btn-icon btn-sm edit-response disabled"><i class="icon-pencil5" style="color: #fff;"></i></a>';
-                $row[] = "Feedback Updated";
+                $row[] = '<label style="color:green";>Feedback Updated</label>';
             } else {
                 $row[] = '<a type="button" data-id="' . $stud->id . '" class="btn btn-success btn-icon btn-sm edit-response"><i class="icon-pencil5" style="color: #fff;"></i></a>';
                 $row[] = "";

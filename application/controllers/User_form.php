@@ -14,7 +14,7 @@ class User_form extends CI_Controller
     public function index()
     {
         // if ($this->session->userdata('is_logged_in')) {
-        //  redirect(base_url('student/student_dashboard'), 'refresh');
+        //  redirect(base_url(''), 'refresh');
         // }
         $state = $this->User_form_model->fetch_state();
         $data = array();
